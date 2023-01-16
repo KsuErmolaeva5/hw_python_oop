@@ -88,9 +88,9 @@ class SportsWalking(Training):
     CM_IN_M: int = 100
 
     def get_spent_calories(self) -> float:
-        avg_speed_M_in_SEC = self.get_mean_speed() * self.KMH_IN_MSEC
+        avg_speed_m_in_sec = self.get_mean_speed() * self.KMH_IN_MSEC
         return ((self.CALORIES_WEIGHT_MULTIPLIER * self.weight
-                + ((avg_speed_M_in_SEC**2) / (self.height / self.CM_IN_M))
+                + ((avg_speed_m_in_sec**2) / (self.height / self.CM_IN_M))
                 * self.CALORIES_SPEED_HEIGHT_MULTIPLIER * self.weight)
                 * self.duration * self.MIN_IN_H)
 
@@ -122,15 +122,13 @@ class Swimming(Training):
                 * self.weight * self.duration)
 
 
-kod: Dict[str, Training] = {'SWM': Swimming,
-                            'RUN': Running,
-                            'WLK': SportsWalking}
-
-
 def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
-    class_kod = kod[workout_type](*data)
-    return class_kod
+    code_klass: Dict[str, Training] = {'SWM': Swimming,
+                                       'RUN': Running,
+                                       'WLK': SportsWalking}
+    class_data = code_klass[workout_type](*data)
+    return class_data
 
 
 def main(training: Training) -> None:
