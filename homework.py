@@ -2,7 +2,7 @@ from typing import Dict, List, Tuple
 from dataclasses import dataclass
 
 
-@dataclass(repr = False, eq = False)
+@dataclass(repr=False, eq=False)
 class InfoMessage:
     """Информационное сообщение о тренировке."""
     training_type: str
@@ -10,7 +10,7 @@ class InfoMessage:
     distance: float
     speed: float
     calories: float
-    
+
     def get_message(self) -> str:
         return (f'Тип тренировки: {self.training_type}; '
                 f'Длительность: {self.duration:.3f} ч.; '
@@ -124,8 +124,8 @@ def read_package(workout_type: str, data: List[int]) -> Training:
                                        'RUN': Running,
                                        'WLK': SportsWalking}
     class_data = code_klass[workout_type](*data)
-    return class_data   
-        
+    return class_data
+
 
 def main(training: Training) -> None:
     """Главная функция."""
